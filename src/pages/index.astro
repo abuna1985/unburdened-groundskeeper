@@ -1,16 +1,30 @@
 ---
-
+import AppLayout from '../layouts/AppLayout.astro';
+import { Button } from '../components/ui/Button';
+import { Input } from '../components/ui/Input';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<AppLayout title="Groundskeeper">
+	<div class="space-y-10">
+		{/* Identify the tool and the current view context clearly. */}
+		<header class="border-b-2 border-zinc-800 pb-4">
+			<h1 class="text-2xl font-black uppercase tracking-[0.2em] text-industrial-action">
+				Groundskeeper
+			</h1>
+		</header>
+
+		{/* Primary Action: Focused strictly on job entry. */}
+		<div class="space-y-6">
+			<Input label="Job Location" placeholder="Street Address" />
+			<Button client:load>[ + ] LOG NEW JOB</Button>
+		</div>
+
+		{/* Data Feedback: Displays the live status of the local vault. */}
+		<div class="pt-10">
+			<div class="h-px bg-zinc-800 w-full mb-4"></div>
+			<p class="text-zinc-500 text-center uppercase tracking-widest text-xs font-bold">
+				Local Vault Empty
+			</p>
+		</div>
+	</div>
+</AppLayout>
