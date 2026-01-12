@@ -6,16 +6,15 @@ export default {
       colors: {
         // The "Safety" Palette (ADR 001 - Section 3)
         industrial: {
-          bg: "#09090b", // Zinc-950 (Pitch Black)
-          surface: "#18181b", // Zinc-900 (Panel Grey)
-          text: "#f4f4f5", // Zinc-100 (High-Vis White)
-          muted: "#a1a1aa", // Zinc-400 (Secondary Text)
-          action: "#fbbf24", // Amber-400 (Safety Yellow)
-          danger: "#ef4444", // Red-500 (Delete/Stop)
+          bg: "#000000", // Absolute Black (OLED efficient)
+          surface: "#18181b", // Zinc-900 (Visual depth for cards)
+          text: "#f4f4f5", // High-Vis White
+          muted: "#71717a", // Zinc-500 (Secondary info)
+          action: "#fbbf24", // Safety Yellow
+          danger: "#ef4444", // Stop/Delete Red
         },
       },
     },
   },
   plugins: [],
 };
-

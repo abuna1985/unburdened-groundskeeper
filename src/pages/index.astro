@@ -1,30 +1,43 @@
 ---
 import AppLayout from '../layouts/AppLayout.astro';
-import { Button } from '../components/ui/Button';
-import { Input } from '../components/ui/Input';
+import { NewJobForm } from '../components/features/NewJobForm';
+import { JobList } from '../components/features/JobList';
 ---
 
 <AppLayout title="Groundskeeper">
-	<div class="space-y-10">
-		{/* Identify the tool and the current view context clearly. */}
+	<div class="space-y-16">
+		{/* Header identifies the tool and current view context. */}
 		<header class="border-b-2 border-zinc-800 pb-4">
-			<h1 class="text-2xl font-black uppercase tracking-[0.2em] text-industrial-action">
-				Groundskeeper
-			</h1>
+			<h1 class="text-2xl font-black uppercase tracking-[0.3em] text-industrial-action leading-none">Groundskeeper</h1>
 		</header>
 
-		{/* Primary Action: Focused strictly on job entry. */}
-		<div class="space-y-6">
-			<Input label="Job Location" placeholder="Street Address" />
-			<Button client:load>[ + ] LOG NEW JOB</Button>
-		</div>
+		{/* Primary entry point for logging field data. */}
+		<section class="space-y-6">
+			<NewJobForm client:load />
+		</section>
 
-		{/* Data Feedback: Displays the live status of the local vault. */}
-		<div class="pt-10">
-			<div class="h-px bg-zinc-800 w-full mb-4"></div>
-			<p class="text-zinc-500 text-center uppercase tracking-widest text-xs font-bold">
-				Local Vault Empty
-			</p>
-		</div>
+		{/* Displays saved jobs or a structural skeleton while the database syncs. */}
+		<section class="relative">
+      {/* The Static Frame provides a 0ms visual target to eliminate perceived lag. */}
+      <div id="loading-frame" class="space-y-6 pt-6">
+        <div class="h-4 w-32 bg-zinc-900 animate-pulse rounded-sm"></div>
+        <div class="space-y-4">
+          {[1, 2, 3].map((i) => (
+            <div key={i} class="h-32 w-full bg-zinc-900 border border-zinc-800 animate-pulse rounded-sm opacity-50"></div>
+          ))}
+        </div>
+      </div>
+
+			{/* client:only="react" skips server-side rendering to prevent hydration errors. */}
+			<JobList client:only="react" />
+		</section>
 	</div>
 </AppLayout>
+
+<script>
+  // Remove the static skeleton once the browser engine is officially ready.
+  import { $isHydrated } from '../stores/jobs';
+  $isHydrated.subscribe(ready => {
+    if (ready) document.getElementById('loading-frame')?.remove();
+  });
+</script>

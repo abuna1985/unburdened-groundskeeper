@@ -8,12 +8,13 @@ const { title } = Astro.props;
 		<meta charset="UTF-8" />
 		<!-- Lock viewport to prevent accidental scaling during physical activity. -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-		<title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
 	</head>
-	<!-- Flex centering creates a "Device Frame" feel for desktop users. -->
-	<body class="bg-zinc-900 text-zinc-100 min-h-screen antialiased flex justify-center">
-		<!-- Limit width to 448px (Mobile Standard) and enforce absolute black background. -->
-		<main class="w-full max-w-md bg-industrial-bg min-h-screen border-x border-zinc-800 px-6 py-8 shadow-2xl">
+	<!-- Flex centering and zinc-950 background highlight the mobile chassis on large screens. -->
+	<body class="bg-zinc-950 text-zinc-100 min-h-screen antialiased flex justify-center">
+		<!-- Limit width to 448px (Mobile Standard) and add border for desktop anchoring. -->
+		<main class="w-full max-w-md bg-industrial-bg min-h-screen border-x border-zinc-800 px-6 py-10 shadow-2xl">
 			<slot />
 		</main>
 	</body>
