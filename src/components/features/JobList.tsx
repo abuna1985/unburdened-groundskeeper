@@ -3,31 +3,36 @@ import { useStore } from "@nanostores/react";
 import { $jobs, $isHydrated } from "../../stores/jobs";
 import { JobCard } from "../ui/JobCard";
 
+/**
+ * - GOAL: The history view of the ledger.
+ * - FEEDBACK: Shows a live count of active jobs.
+ * - EMPTY STATE: A dashed "Slot" that invites the user to fill it.
+ */
 export function JobList() {
   const jobs = useStore($jobs);
   const isHydrated = useStore($isHydrated);
 
-  // We return null until hydration is complete to prevent visual conflicts with the Static Frame.
+  // Prevent hydration mismatch by waiting for the database.
   if (!isHydrated) return null;
 
-  return (
+ return (
     <div className="space-y-6 pt-6 animate-in fade-in duration-500">
-      {/* The header displays the live count of verified records in the local vault. */}
-      <div className="flex justify-between items-end border-b-2 border-zinc-800 pb-4">
-        <h2 className="text-xs font-black uppercase tracking-[0.3em] text-industrial-muted">
+      {/* HEADER: Label + Count */}
+      <div className="flex justify-between items-end border-b-2 border-slate-200 pb-4">
+        <h2 className="text-xs font-black uppercase tracking-[0.3em] text-ledger-muted">
           Active Jobs
         </h2>
-        <span className="text-xs font-black text-industrial-action px-2 py-0.5 bg-zinc-900 rounded-sm">
+        <span className="text-xs font-black text-ledger-action px-2 py-0.5 bg-blue-50 rounded-md">
           {jobs.length}
         </span>
       </div>
 
       <div className="space-y-4">
-        {/* If the vault is verified empty, we show a clear instructional fallback. */}
+        {/* EMPTY STATE: Looks like an empty slot in a binder */}
         {jobs.length === 0 ? (
-          <div className="py-12 border-2 border-dashed border-zinc-800 rounded-sm text-center">
-            <p className="text-xs font-bold uppercase tracking-widest text-zinc-600 italic">
-              Local Vault Empty
+          <div className="py-12 border-2 border-dashed border-slate-300 rounded-xl text-center bg-slate-50">
+            <p className="text-xs font-bold uppercase tracking-widest text-slate-400 italic">
+              Ledger Empty
             </p>
           </div>
         ) : (
@@ -35,5 +40,4 @@ export function JobList() {
         )}
       </div>
     </div>
-  );
-}
+  );}

@@ -4,14 +4,15 @@ export default {
   theme: {
     extend: {
       colors: {
-        // The "Safety" Palette (ADR 001 - Section 3)
-        industrial: {
-          bg: "#000000", // Absolute Black (OLED efficient)
-          surface: "#18181b", // Zinc-900 (Visual depth for cards)
-          text: "#f4f4f5", // High-Vis White
-          muted: "#71717a", // Zinc-500 (Secondary info)
-          action: "#fbbf24", // Safety Yellow
-          danger: "#ef4444", // Stop/Delete Red
+        // The "Field Ledger" Palette
+        ledger: {
+          bg: "#f8fafc",      // Slate-50 (Paper White)
+          surface: "#ffffff", // White (Cards)
+          ink: "#0f172a",     // Slate-900 (High Contrast Text)
+          muted: "#64748b",   // Slate-500 (Labels/Secondary)
+          action: "#2563eb",  // Blue-600 (Primary Action)
+          success: "#16a34a", // Green-600 (Money)
+          danger: "#ef4444",  // Red-500 (Delete/Stop)
         },
       },
     },

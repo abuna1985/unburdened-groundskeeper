@@ -1,29 +1,39 @@
 // src/components/ui/JobCard.tsx
 import type { Job } from "../../types";
 
+/**
+ * - GOAL: A clean, professional receipt for a completed job 
+ * - STYLE: White card with rounded corners and a soft shadow.
+ * - READABILITY: Large text (lg) for address; Green for money.
+ * - STATUS: Clear badge to show if the job is pending or paid.
+*/
 export function JobCard({ job }: { job: Job }) {
-  {
-    /* Strategy: Use relative positioning to ensure cards stack correctly in the list flow. */
-  }
   return (
-    <div className="relative p-6 bg-industrial-surface border border-zinc-800 rounded-sm space-y-3">
-      <div className="flex justify-between items-start">
-        <h3 className="font-black uppercase tracking-tight text-white leading-tight">
+    <div className="relative p-6 bg-white border border-slate-200 rounded-xl shadow-sm space-y-3 transition-shadow hover:shadow-md">
+      {/* HEADER: Location & Status */}
+      <div className="flex justify-between items-start gap-4">
+        {/* Address: text-lg (18px) for outdoor readability */}
+        <h3 className="font-bold uppercase tracking-tight text-ledger-ink leading-tight text-lg">
           {job.location.display}
         </h3>
-        {/* Use high-contrast status badges for instant readability in glare. */}
-        <span className="text-[10px] font-black px-2 py-1 bg-zinc-800 text-industrial-muted uppercase tracking-tighter ring-1 ring-zinc-700">
+        {/* Status: text-xs (12px) so it's not microscopic */}
+        <span className="text-xs font-black px-2 py-1 bg-slate-100 text-ledger-muted uppercase tracking-tighter rounded-md ring-1 ring-slate-200 shrink-0">
           {job.status}
         </span>
       </div>
 
-      {/* Horizontal divider to separate the location from the metadata. */}
-      <div className="h-px bg-zinc-800 w-full opacity-50"></div>
+      {/* DIVIDER: Subtle separation like a printed receipt line */}
+      <div className="h-px bg-slate-100 w-full"></div>
 
-      <p className="text-xs text-industrial-muted font-bold uppercase tracking-widest leading-none">
-        {job.clientName} —{" "}
-        <span className="text-industrial-action">${job.price}</span>
-      </p>
+      {/* DETAILS: Client & Price */}
+      <div className="flex justify-between items-end">
+        <p className="text-sm text-ledger-muted font-bold uppercase tracking-widest leading-none">
+          {job.clientName}
+        </p>
+        <span className="text-ledger-success text-xl font-black tracking-tight">
+          ${job.price.toFixed(2)}
+        </span>
+      </div>
     </div>
   );
 }

@@ -1,4 +1,9 @@
 ---
+/**
+ * - GOAL: Adaptive frame for Field (Phone) and Office (Laptop).
+ * - WIDTH: Full mobile width; limited 5xl desktop width.
+ * - TEXT: Large base size for high-glare readability.
+ */
 interface Props { title: string; }
 const { title } = Astro.props;
 ---
@@ -6,16 +11,13 @@ const { title } = Astro.props;
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<!-- Lock viewport to prevent accidental scaling during physical activity. -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
 	</head>
-	<!-- Flex centering and zinc-950 background highlight the mobile chassis on large screens. -->
-	<body class="bg-zinc-950 text-zinc-100 min-h-screen antialiased flex justify-center">
-		<!-- Limit width to 448px (Mobile Standard) and add border for desktop anchoring. -->
-		<main class="w-full max-w-md bg-industrial-bg min-h-screen border-x border-zinc-800 px-6 py-10 shadow-2xl">
+	<body class="bg-ledger-bg text-ledger-ink text-xl min-h-screen antialiased flex justify-center">
+		<main class="w-full max-w-5xl min-h-screen px-6 py-10">
 			<slot />
 		</main>
-	</body>
+  </body>
 </html>
